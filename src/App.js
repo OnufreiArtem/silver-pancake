@@ -1,23 +1,61 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import MenuBar from './components/MenuBar/MenuBar';
+
+const colorScheme = {
+  primaryColor: "#46456E",
+  secondColor: "#46456E",
+  thirdColor: "#A5A4E0",
+  bcgColor: "#fff",
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MenuBar items={[
+        {
+          title: "File",
+          color: colorScheme.bcgColor,
+          submenu: [
+            {
+              icon: "",
+              title: "Export",
+              colorScheme: colorScheme,
+              onClick: () => { console.log("Export clicked")}
+            },
+            {
+              icon: "",
+              title: "Clear",
+              colorScheme: colorScheme,
+              onClick: () => {}
+            },
+            {
+              icon: "",
+              title: "Dark Theme",
+              colorScheme: colorScheme,
+              onClick: () => {}
+            },
+          ]
+        },
+        {
+          title: "Help",
+          color: colorScheme.bcgColor,
+          submenu: [
+            {
+              icon: "",
+              title: "How to use",
+              colorScheme: colorScheme,
+              onClick: () => {}
+            },
+            {
+              icon: "",
+              title: "About",
+              colorScheme: colorScheme,
+              onClick: () => {}
+            },
+          ]
+        }
+      ]} colorScheme={colorScheme} />
     </div>
   );
 }
