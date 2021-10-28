@@ -3,6 +3,7 @@ import React from 'react';
 import MenuBar from './components/MenuBar/MenuBar';
 import About from './components/About/About';
 import HowToUse from './components/HowToUse/HowToUse';
+import MainContent from './components/MainContent/MainContent';
 
 const colorScheme = {
   primaryColor: "#46456E",
@@ -56,7 +57,7 @@ function App() {
               icon: "",
               title: "Dark Theme",
               colorScheme: theme,
-              onClick: () => { setTheme(darkColorScheme)}
+              onClick: () => { setTheme(darkColorScheme) }
             },
           ]
         },
@@ -79,6 +80,7 @@ function App() {
           ]
         }
       ]} colorScheme={theme} />
+      <MainContent colorScheme={theme} />
       {
         showAbout && <About onClose={(state) => setShowAbout(state)} colorScheme={theme} />
       }
