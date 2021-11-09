@@ -10,9 +10,12 @@ const DropdownLayout = styled.span`
     font-style: italic;
     font-size: 18px;
     color: ${props => props.color};
+    border-radius: 5px;
+    padding: 5px;
+    user-select: none;
 
     &:hover {
-        background-color: #00000080;
+        background-color: ${props => props.colorScheme.secondColor};
     }
 `
 
@@ -23,6 +26,10 @@ const DropdownItemContainter = styled.div`
     align-items: start;
     flex-direction: column;
     background-color: #ccc;
+    border: 1px solid ${props => props.colorScheme.primaryColor};
+    border-radius: 2px;
+    background-color: ${props => props.colorScheme.secondColor};
+    user-select: none;
 
     top: ${props => props.top}px;
     left: ${props => props.left}px;
@@ -39,9 +46,10 @@ const DropdownItem = styled.span`
     font-style: italic;
     color: ${props => props.color};
     font-size: 18px;
+    user-select: none;
 
     &:hover {
-        background-color: yellow;
+        background-color: ${props => props.colorScheme.thirdColor}80;
     }
 `
 
@@ -77,14 +85,14 @@ const Dropdown = ({ title, colorScheme, selected, onSelected, items }) => {
 
     return (
         <div>
-            <DropdownLayout color={colorScheme.primaryColor} ref={dropdownRef} onClick={_ => onDropdownClick()}>
+            <DropdownLayout color={colorScheme.primaryColor} colorScheme={colorScheme} ref={dropdownRef} onClick={_ => onDropdownClick()}>
                 {title + " " + items[selected].title}
                 <Icon source={""} />
             </DropdownLayout>
             {
-                showItems && <DropdownItemContainter top={containterPos.y} left={containterPos.x}>
+                showItems && <DropdownItemContainter colorScheme={colorScheme} top={containterPos.y} left={containterPos.x}>
                     {
-                        items.map((it, index) => <DropdownItem color={colorScheme.primaryColor} width={containterPos.w}  key={nanoid()} onClick={_ => onDropdownItemClick(index)}>{it.title}</DropdownItem>)
+                        items.map((it, index) => <DropdownItem colorScheme={colorScheme} color={colorScheme.primaryColor} width={containterPos.w}  key={nanoid()} onClick={_ => onDropdownItemClick(index)}>{it.title}</DropdownItem>)
                     }
                 </DropdownItemContainter>
             }
