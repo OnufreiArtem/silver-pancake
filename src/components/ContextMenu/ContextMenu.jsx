@@ -1,25 +1,12 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 
-const SubmenuLayout = styled.span`
-    position: absolute;
-    top: ${props => props.top}px;
-    left: ${props => props.left}px;
+export const ContextMenuLayout = styled.span`
+    display:block;
+    width: 150px;
+    background-color: ${props => props.colorScheme.secondColor};
     border: 1px solid ${props => props.colorScheme.primaryColor};
     border-radius: 2px;
-    background-color: ${props => props.colorScheme.secondColor};
-`
-
-const SubItemContainer = styled.span`
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    width: 150px;
-    background-color: transparent;
-    &:hover {
-        background-color: ${props => props.colorScheme.secondColor};
-    }
 `
 
 const Icon = styled.span`
@@ -27,43 +14,18 @@ const Icon = styled.span`
     heigh: 20px;
 `
 
-const Title = styled.span`
+export const ContextMenuItemLayout = styled.p`
     font-size: 18px;
     color: ${props => props.colorScheme.primaryColor};
+    padding: 0;
+    margin: 0;
     padding-top: 5px;
     padding-bottom: 5px;
     user-select: none;
+    text-align: left;
+
+
+    &:hover {
+        background-color: ${props => props.colorScheme.thirdColor};
+    }
 `
-
-
-
-const ContextMenu = ({ pos, items, show, colorScheme }) => {
-
-    return (
-        <>
-            {
-                show && <SubmenuLayout autoFocus top={pos.top} left={pos.left} colorScheme={colorScheme}>
-                    {
-                        items.map(item => <MenuSubItem key={nanoid()} colorScheme={colorScheme} icon={item.icon} title={item.title} onClick={_ => { item.onClick(item); }} />)
-                    }
-                </SubmenuLayout>
-            }
-
-        </>
-
-    )
-
-}
-
-const MenuSubItem = ({ colorScheme, icon, title, onClick }) => {
-
-    return (
-        <SubItemContainer colorScheme={colorScheme} onClick={_ => onClick()}>
-            <Icon icon={icon}></Icon>
-            <Title colorScheme={colorScheme}>{title}</Title>
-        </SubItemContainer>
-    )
-
-}
-
-export default ContextMenu;

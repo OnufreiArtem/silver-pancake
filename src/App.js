@@ -4,7 +4,12 @@ import MenuBar from './components/MenuBar/MenuBar';
 import About from './components/About/About';
 import HowToUse from './components/HowToUse/HowToUse';
 import MainContent from './components/MainContent/MainContent';
-import ContextMenu from './components/ContextMenu/ContextMenu';
+import {
+  ContextMenuLayout,
+  ContextMenuItemLayout
+} from './components/ContextMenu/ContextMenu';
+import { ContextMenu, ContextMenuTrigger, MenuItem } from 'react-contextmenu';
+// import ContextMenu from './components/ContextMenu/ContextMenu';
 
 const colorScheme = {
   primaryColor: "#46456E",
@@ -20,6 +25,8 @@ const darkColorScheme = {
   secondColor: "#46456E",
   thirdColor: "#A5A4E0",
   bcgColor: "#393F52",
+  searchBtn: "#A5A4E0",
+  searchBtnHover: "#7a79c9"
 }
 
 function App() {
@@ -47,23 +54,20 @@ function App() {
     setContextPosition({ top: event.y, left: event.x })
   }
 
-  const onMouseDown = (event) => {
-    if (event.which === 1) {
-      console.log("Clicked left button")
-      setContextVisible(false);
-      setContextPosition({ top: -1000, left:-1000 })
-    }
+  // clickHandlers
+
+  const onExportPressed = () => {
+
   }
 
-  // useEffect(() => {
-  //   document.addEventListener("contextmenu", onContextMenu);
-  //   document.addEventListener("mousedown", onMouseDown)
+  const onClearPressed = () => {
 
-  //   return () => {
-  //     document.removeEventListener("contextmenu", onContextMenu);
-  //     document.removeEventListener("mousedown", onMouseDown)
-  //   }
-  // })
+  }
+
+  const onSwitchTheme = () => {
+    setTheme(theme === colorScheme ? darkColorScheme : colorScheme);
+  }
+
 
   return (
     <div className="App">
@@ -86,9 +90,9 @@ function App() {
             },
             {
               icon: "",
-              title: "Dark Theme",
+              title: "Switch Theme",
               colorScheme: theme,
-              onClick: () => { setTheme(darkColorScheme) }
+              onClick: () => { onSwitchTheme() }
             },
           ]
         },
@@ -111,7 +115,30 @@ function App() {
           ]
         }
       ]} colorScheme={theme} />
-      <MainContent colorScheme={theme} />
+      <ContextMenuTrigger id="main-context-trigger">
+        <MainContent colorScheme={theme} />
+      </ContextMenuTrigger>
+
+      <ContextMenu id="main-context-trigger" class="context-menu">
+        <ContextMenuLayout colorScheme={theme}>
+          <ContextMenuItemLayout colorScheme={theme}>
+            <MenuItem class="context-menu-item">
+              Export
+            </MenuItem>
+          </ContextMenuItemLayout>
+          <ContextMenuItemLayout colorScheme={theme}>
+            <MenuItem class="context-menu-item">
+              Clear
+            </MenuItem>
+          </ContextMenuItemLayout>
+          <ContextMenuItemLayout colorScheme={theme}>
+            <MenuItem class="context-menu-item">
+              Dark Theme
+            </MenuItem>
+          </ContextMenuItemLayout>
+        </ContextMenuLayout >
+      </ContextMenu >
+
       {
         showAbout && <About onClose={(state) => setShowAbout(state)} colorScheme={theme} />
       }
@@ -119,28 +146,8 @@ function App() {
       {
         showHowToUse && <HowToUse onClose={(state) => setShowHowToUse(state)} colorScheme={theme} />
       }
-
-      <ContextMenu pos={contextPosition} show={contextVisible} colorScheme={theme} items={[
-        {
-          icon: "",
-          title: "Export",
-          colorScheme: theme,
-          onClick: () => { console.log("Export clicked"); setContextVisible(false) }
-        },
-        {
-          icon: "",
-          title: "Clear",
-          colorScheme: theme,
-          onClick: () => { setContextVisible(false); }
-        },
-        {
-          icon: "",
-          title: "Dark Theme",
-          colorScheme: theme,
-          onClick: () => { setTheme(darkColorScheme); setContextVisible(false) }
-        },
-      ]} />
-    </div>
+      
+    </div >
   );
 }
 
