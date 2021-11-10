@@ -19,6 +19,7 @@ const SubmenuLayout = styled.span`
     border: 1px solid ${props => props.colorScheme.primaryColor};
     border-radius: 2px;
     background-color: ${props => props.colorScheme.thirdColor}80;
+    box-shadow: 0 0 10px #00000030;
 `
 
 const MenuBarItem = ({ id, title, submenuItems, colorScheme, isOpenned, menuPosition, openCollback }) => {

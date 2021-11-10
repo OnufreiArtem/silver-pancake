@@ -29,9 +29,11 @@ const SearchBar = styled.div`
     border-radius: 999px;
 `
 
-const Icon = styled.span`
-    background-image: url(${props => props.source})
+const Icon = styled.svg`
+    width: 100%;
+    height: 100%;
 `
+// transform: translate(-50%, -50%);
 
 const SearchInput = styled.input`
     position: relative;
@@ -58,10 +60,12 @@ const SearchInput = styled.input`
 `
 
 const SearchButton = styled.button`
-    diplay: block;
+    diplay: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     border: none;
-    border: 3px solid ${props => props.color};
+    border: 3px solid ${props => props.colorScheme.primaryColor};
     border-radius: 999px;
     height: 60px;
     width: 100px;
@@ -70,15 +74,15 @@ const SearchButton = styled.button`
     right: 25px;
     outline: none;
     transition: .3s all;
-    color: ${props => props.color};
+    color: ${props => props.colorScheme.primaryColor};
     background-image: url('https://www.figma.com/file/RXu7kPyXpEEIgM5gwmHZIQ/Guess-word?node-id=124%3A6');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    background-color: ${props => props.bcg};
+    background-color: ${props => props.colorScheme.searchBtn};
 
     &:hover {
-        background-color: ${props => props.bcg};
+        background-color: ${props => props.colorScheme.searchBtnHover};
     }
 `
 
@@ -113,8 +117,10 @@ const MainContent = ({ colorScheme }) => {
                 <Title color={colorScheme.primaryColor}>Search for your word:</Title>
                 <SearchBar>
                     <SearchInput placeholder="Input letters you know" color={colorScheme.primaryColor} bcg={colorScheme.thirdColor} />
-                    <SearchButton color={colorScheme.primaryColor} bcg={colorScheme.thirdColor}>
-                        <Icon source="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/PICOL_icon_Search.svg/1200px-PICOL_icon_Search.svg.png" />
+                    <SearchButton colorScheme={colorScheme}>
+                        <Icon colorScheme={colorScheme} width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M29.0625 26.25H27.5813L27.0563 25.7437C28.8938 23.6063 30 20.8313 30 17.8125C30 11.0813 24.5438 5.625 17.8125 5.625C11.0813 5.625 5.625 11.0813 5.625 17.8125C5.625 24.5438 11.0813 30 17.8125 30C20.8313 30 23.6063 28.8938 25.7437 27.0563L26.25 27.5813V29.0625L35.625 38.4188L38.4188 35.625L29.0625 26.25ZM17.8125 26.25C13.1438 26.25 9.375 22.4813 9.375 17.8125C9.375 13.1438 13.1438 9.375 17.8125 9.375C22.4813 9.375 26.25 13.1438 26.25 17.8125C26.25 22.4813 22.4813 26.25 17.8125 26.25Z" fill={colorScheme.primaryColor}/>
+                        </Icon>
                     </SearchButton>
                 </SearchBar>
                 <Hint color={colorScheme.primaryColor}>Use “.” where letter is unknown</Hint>

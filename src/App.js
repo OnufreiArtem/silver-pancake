@@ -11,6 +11,8 @@ const colorScheme = {
   secondColor: "#d2d1ef",
   thirdColor: "#A5A4E0",
   bcgColor: "#fff",
+  searchBtn: "#A5A4E0",
+  searchBtnHover: "#7a79c9"
 }
 
 const darkColorScheme = {
@@ -53,15 +55,15 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    document.addEventListener("contextmenu", onContextMenu);
-    document.addEventListener("mousedown", onMouseDown)
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", onContextMenu);
+  //   document.addEventListener("mousedown", onMouseDown)
 
-    return () => {
-      document.removeEventListener("contextmenu", onContextMenu);
-      document.removeEventListener("mousedown", onMouseDown)
-    }
-  })
+  //   return () => {
+  //     document.removeEventListener("contextmenu", onContextMenu);
+  //     document.removeEventListener("mousedown", onMouseDown)
+  //   }
+  // })
 
   return (
     <div className="App">
