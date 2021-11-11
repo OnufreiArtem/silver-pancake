@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MenuSubItem from './MenuSubItem';
 import { nanoid } from 'nanoid';
+import "../../index.css"
 
 const MenuBarItemLayout = styled.span`
     display: block;
@@ -50,11 +51,9 @@ const MenuBarItem = ({ id, title, sections, colorScheme, isOpenned, menuPosition
                         <>
                         <hr style={{ margin: 0, padding: 0, border: 'none', borderTop: `1px solid ${colorScheme.menuSectionSeparatorColor}` }}/>
                         {
-                             sections[1].map(item => <MenuSubItem isVisible={isOpenned} key={nanoid()} last={false} icon={item.icon} title={item.title} colorScheme={item.colorScheme} onClick={_ => onSubmenuItemClicked(item)} />)
+                             sections[1].map(item => <MenuSubItem shortCut="Ctrl+X" isVisible={isOpenned} key={nanoid()} last={false} icon={item.icon} title={item.title} colorScheme={item.colorScheme} onClick={_ => onSubmenuItemClicked(item)} />)
                         }
                         </>
-                        
-                       
                     )
                 }
             

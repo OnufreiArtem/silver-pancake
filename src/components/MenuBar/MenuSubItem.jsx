@@ -1,6 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const generateAfter = (shortCut, hintColor) => {
+    return `
+        &::after {
+            content: '${shortCut}';
+            font-size: 14px;
+            font-style: italic;
+            color: ${hintColor};
+            display: block;
+            position: absolute;
+            right: 0;
+            margin-right: 20px;
+        }
+    `
+}
+
 const SubItemContainer = styled.span`
     display: flex;
     justify-content: start;
@@ -8,9 +23,14 @@ const SubItemContainer = styled.span`
     width: 170px;
     background-color: transparent;
     padding: 5px;
+    transition: .3s all;
+
     &:hover {
         background-color: ${props => props.colorScheme.contextElementHoverColor};
     }
+
+    ${props => props.showShortCut ? generateAfter(props.shortCut, props.colorScheme.hintColor) : ''}
+    
 `
 
 const Icon = styled.svg`
@@ -24,7 +44,7 @@ const Text = styled.span`
     user-select: none;
 `
 
-const MenuSubItem = ({ icon, last, title, colorScheme, onClick }) => {
+const MenuSubItem = ({ icon, shortCut, title, colorScheme, onClick }) => {
 
     const iconGenerator = (icon) => {
         if (icon === "export") {
@@ -47,7 +67,7 @@ const MenuSubItem = ({ icon, last, title, colorScheme, onClick }) => {
         }
     }
 
-    return (<SubItemContainer colorScheme={colorScheme} onClick={_ => onClick()}>
+    return (<SubItemContainer showShortCut={shortCut !== undefined} shortCut={shortCut} colorScheme={colorScheme} onClick={_ => onClick()}>
         {
             iconGenerator(icon)
         }

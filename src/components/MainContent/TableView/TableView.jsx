@@ -21,11 +21,18 @@ const TableItem = styled.span`
     display: block;
     font-size: 20px;
     color: ${props => props.color};
+    user-select: none;
+`
+
+const NotDataText = styled.span`
+    display: block;
+    font-size: 20px;
+    color: ${props => props.colorScheme.hintColor};
+    padding: 30px;
+    font-style: italic;
 `
 
 const TableView = ({ colorScheme, columns, maxInColumn, data }) => {
-
-
     const subdivide = (list, maxColumns, maxElementsInColumn) => {
         let arrays = Array(maxColumns).fill([]);
         for (let i = 0; i < maxColumns; i++) {
@@ -36,7 +43,6 @@ const TableView = ({ colorScheme, columns, maxInColumn, data }) => {
                 }
             }
         }
-        // console.log(arrays)
         return arrays;
     }
 
@@ -45,11 +51,18 @@ const TableView = ({ colorScheme, columns, maxInColumn, data }) => {
     const toTableItem = (text) => <TableItem key={nanoid()} color={text === "-1" ? 'transparent' : colorScheme.primaryColor}>{text}</TableItem>;
 
     return (
-        <TableContainer columns={columns}>
+        <>
             {
-                subdivide(data, columns, maxInColumn).map(dataInCol => toTableColumn(dataInCol))
+                !data.length ? <NotDataText colorScheme={colorScheme}>Not words was found</NotDataText> : (
+                    <TableContainer columns={columns}>
+                        {
+                            subdivide(data, columns, maxInColumn).map(dataInCol => toTableColumn(dataInCol))
+                        }
+                    </TableContainer>
+                )
             }
-        </TableContainer>
+        </>
+
     )
 }
 

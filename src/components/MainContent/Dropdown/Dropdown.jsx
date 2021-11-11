@@ -36,9 +36,6 @@ const DropdownItemContainter = styled.div`
     box-shadow: 0 0 10px #00000030;
 `
 
-//    min-width: ${props => props.width};
-// max-width: ${props => props.width};
-
 const DropdownItem = styled.span`
     display: block;
     padding: 10px;
@@ -48,7 +45,8 @@ const DropdownItem = styled.span`
     color: ${props => props.colorScheme.dropdownTextColor};
     font-size: 18px;
     user-select: none;
-
+    transition: .3s all;
+    
     &:hover {
         background-color: ${props => props.colorScheme.contextElementHoverColor};
         color: ${props => props.colorScheme.dropdownTextHoverColor};
@@ -69,8 +67,6 @@ const Dropdown = ({ title, colorScheme, selected, onSelected, items }) => {
 
     const detectContainerPosition = (ref) => {
         const pos = { y: ref.current.offsetTop + ref.current.offsetHeight, x: ref.current.offsetLeft, w: ref.current.offsetWidth }
-        console.log(pos);
-        console.log(ref);
         setContainerPos(pos);
     }
 

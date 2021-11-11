@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const ContextMenuLayout = styled.span`
@@ -27,8 +26,7 @@ export const IconContextMenuItemLayout = styled.span`
     padding: 5px 5px 5px 5px;
     user-select: none;
     text-align: left;
-    translate: .3s all;
-
+    transition: .3s all;
 
     &:hover {
         background-color: ${props => props.colorScheme.contextElementHoverColor};
@@ -46,8 +44,7 @@ export const ContextMenuItemLayout = styled.span`
     padding: 5px 5px 5px 25px;
     user-select: none;
     text-align: left;
-    translate: .3s all;
-
+    transition: .3s all;
 
     &:hover {
         background-color: ${props => props.colorScheme.contextElementHoverColor};
