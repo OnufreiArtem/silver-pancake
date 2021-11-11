@@ -20,18 +20,18 @@ const Paper = styled.div`
     min-width: 500px;
     max-width: 600px;
     border-radius: 20px;
-    background-color: ${props => props.bcgColor};
+    background-color: ${props => props.colorScheme.dialogueBcgColor};
     padding: 30px 40px;
 `
 
 const PaperHeader = styled.span`
     display: block;
     font-size: 36px;
-    border-bottom: 4px solid ${props => props.color}80;
+    border-bottom: 4px solid ${props => props.colorScheme.dialogueTextColor}80;
     text-align: left;
     margin-bottom: 20px;
     font-style: bold;
-    color: ${props => props.color};
+    color: ${props => props.colorScheme.dialogueTextColor};
 `
 
 const PaperContent = styled.span`
@@ -39,27 +39,29 @@ const PaperContent = styled.span`
     font-size: 18px;
     padding-bottom: 40px;
     text-align: left;
-    color: ${props => props.color};
+    color: ${props => props.colorScheme.dialogueTextColor};
 `
 
 const PaperFooter = styled.div`
-    border-top: 4px solid ${props => props.color}80;
+    border-top: 4px solid ${props => props.colorScheme.dialogueTextColor}80;
     color: ${props => props.color};
 `
 
 const CloseBtn = styled.button`
     border-radius: 10px;
-    background-color: ${props => props.bcgColor};
-    color: ${props => props.color};
+    background-color: ${props => props.colorScheme.dialogueBtnColor};
+    color: ${props => props.colorScheme.dialogueBtnTextColor};
     border: none;
     padding: 10px 50px;
     font-size: 20px;
     font-style: italic;
     float: right;
     transition: .3s all;
+    box-shadow: 0 0 10px #00000030;
 
     &:hover {
-        background-color: ${props => props.bcgColor}A0;
+        color: ${props => props.colorScheme.dialogueBtnTextHoverColor};
+        background-color: ${props => props.colorScheme.dialogueBtnHover};
     }
 `
 
@@ -76,17 +78,17 @@ const HowToUse = ({ onClose, colorScheme }) => {
 
     return (
         <DarkBackground>
-            <Paper bcgColor={colorScheme.bcgColor}>
-                <PaperHeader color={colorScheme.primaryColor}>How to use out app?</PaperHeader>
-                <PaperContent color={colorScheme.primaryColor}>
-                    <Step color={colorScheme.primaryColor} title="Step 1:" description="Select the search bar" />
-                    <Step color={colorScheme.primaryColor} title="Step 2:" description="Enter the letters of the word you whant to guess (If tou don’t the letter, just enter “.” instead). Example: Police (need to guess) -> P...ce (what to enter if you know only “P”, “c” and “e”). " />
-                    <Step color={colorScheme.primaryColor} title="Step 3:" description="Press the search button." />
+            <Paper colorScheme={colorScheme}>
+                <PaperHeader colorScheme={colorScheme}>How to use out app?</PaperHeader>
+                <PaperContent colorScheme={colorScheme}>
+                    <Step colorScheme={colorScheme} title="Step 1:" description="Select the search bar" />
+                    <Step colorScheme={colorScheme} title="Step 2:" description="Enter the letters of the word you want to guess (If you don’t  know the letter, just enter “.” instead). Example: Police (need to guess) -> P...ce (what to enter if you know only “P”, “c” and “e”). " />
+                    <Step colorScheme={colorScheme} title="Step 3:" description="Press the search button." />
                 </PaperContent>
-                <PaperFooter color={colorScheme.primaryColor}>
-                    <Text>And thats all :D. The system will find you word.</Text>
+                <PaperFooter colorScheme={colorScheme}>
+                    <Text colorScheme={colorScheme}>And thats all :D. The system will find you word.</Text>
                     <div>
-                        <CloseBtn onClick={_ => onClose(false)} bcgColor={colorScheme.thirdColor} color={colorScheme.primaryColor}>Close</CloseBtn>
+                        <CloseBtn colorScheme={colorScheme} onClick={_ => onClose(false)}>Close</CloseBtn>
                     </div>
                 </PaperFooter>
             </Paper>

@@ -4,12 +4,11 @@ import MenuBarItem from './MenuBarItem';
 import { nanoid } from 'nanoid';
 
 const MenuBarContainer = styled.div`
-    background-color: ${props => props.bcgColor};
+    background-color: ${props => props.colorScheme.menuColor};
     display: flex;
     justify-content: start;
     align-items: start;
     font-size: 20px;
-
 `
 
 const MenuBar = ({ items, colorScheme }) => {
@@ -21,9 +20,9 @@ const MenuBar = ({ items, colorScheme }) => {
         setMenuPos(pos);
     }
 
-    return (<MenuBarContainer bcgColor={colorScheme.primaryColor}>
+    return (<MenuBarContainer colorScheme={colorScheme}>
         {
-            items.map((item, index) => <MenuBarItem id={index} key={nanoid()} title={item.title} menuPosition={menuPos} isOpenned={selected === index} submenuItems={item.submenu} openCollback={onMenuItemClicked} colorScheme={colorScheme} />)
+            items.map((item, index) => <MenuBarItem id={index} key={nanoid()} title={item.title} menuPosition={menuPos} isOpenned={selected === index} sections={item.sections} openCollback={onMenuItemClicked} colorScheme={colorScheme} />)
         }
     </MenuBarContainer>)
 }

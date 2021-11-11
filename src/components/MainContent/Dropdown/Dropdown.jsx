@@ -9,13 +9,14 @@ const DropdownLayout = styled.span`
     transition: .3s all;
     font-style: italic;
     font-size: 18px;
-    color: ${props => props.color};
     border-radius: 5px;
     padding: 5px;
     user-select: none;
+    color: ${props => props.colorScheme.dropdownTextColor};
 
     &:hover {
-        background-color: ${props => props.colorScheme.secondColor};
+        background-color: ${props => props.colorScheme.dropdownHover};
+        color: ${props => props.colorScheme.dropdownTextHoverColor};
     }
 `
 
@@ -25,14 +26,14 @@ const DropdownItemContainter = styled.div`
     justify-content: center;
     align-items: start;
     flex-direction: column;
-    background-color: #ccc;
-    border: 1px solid ${props => props.colorScheme.primaryColor};
+    border: 1px solid ${props => props.colorScheme.contextBorderColor};
     border-radius: 2px;
-    background-color: ${props => props.colorScheme.secondColor};
+    background-color: ${props => props.colorScheme.contextBcgColor};
     user-select: none;
 
     top: ${props => props.top}px;
     left: ${props => props.left}px;
+    box-shadow: 0 0 10px #00000030;
 `
 
 //    min-width: ${props => props.width};
@@ -44,12 +45,13 @@ const DropdownItem = styled.span`
     text-align: left;
     width: ${props => props.width}px;
     font-style: italic;
-    color: ${props => props.color};
+    color: ${props => props.colorScheme.dropdownTextColor};
     font-size: 18px;
     user-select: none;
 
     &:hover {
-        background-color: ${props => props.colorScheme.thirdColor}80;
+        background-color: ${props => props.colorScheme.contextElementHoverColor};
+        color: ${props => props.colorScheme.dropdownTextHoverColor};
     }
 `
 
@@ -85,7 +87,7 @@ const Dropdown = ({ title, colorScheme, selected, onSelected, items }) => {
 
     return (
         <div>
-            <DropdownLayout color={colorScheme.primaryColor} colorScheme={colorScheme} ref={dropdownRef} onClick={_ => onDropdownClick()}>
+            <DropdownLayout colorScheme={colorScheme} ref={dropdownRef} onClick={_ => onDropdownClick()}>
                 {title + " " + items[selected].title}
                 <Icon source={""} />
             </DropdownLayout>

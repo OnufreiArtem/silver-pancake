@@ -3,29 +3,53 @@ import styled from 'styled-components';
 
 export const ContextMenuLayout = styled.span`
     display:block;
-    width: 150px;
-    background-color: ${props => props.colorScheme.secondColor};
-    border: 1px solid ${props => props.colorScheme.primaryColor};
+    width: 170px;
+    background-color: ${props => props.colorScheme.contextBcgColor};
+    border: 1px solid ${props => props.colorScheme.contextBorderColor};
     border-radius: 2px;
+    box-shadow: 0 0 10px #00000030;
 `
 
-const Icon = styled.span`
-    width: 20px;
-    heigh: 20px;
+export const TextContextMenuItem = styled.span`
+    display: block;    
+    color: ${props => props.colorScheme.contextTextColor}
+    padding-left: 10px;
 `
 
-export const ContextMenuItemLayout = styled.p`
+export const IconContextMenuItemLayout = styled.span`
+    display: flex;
+    justify-content: start;
+    align-items: center;    
     font-size: 18px;
-    color: ${props => props.colorScheme.primaryColor};
+    color: ${props => props.colorScheme.contextTextColor};
     padding: 0;
     margin: 0;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 5px 5px 5px;
     user-select: none;
     text-align: left;
+    translate: .3s all;
 
 
     &:hover {
-        background-color: ${props => props.colorScheme.thirdColor};
+        background-color: ${props => props.colorScheme.contextElementHoverColor};
+    }
+`
+
+export const ContextMenuItemLayout = styled.span`
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size: 18px;
+    color: ${props => props.colorScheme.contextTextColor};
+    padding: 0;
+    margin: 0;
+    padding: 5px 5px 5px 25px;
+    user-select: none;
+    text-align: left;
+    translate: .3s all;
+
+
+    &:hover {
+        background-color: ${props => props.colorScheme.contextElementHoverColor};
     }
 `

@@ -5,10 +5,10 @@ import { nanoid } from 'nanoid';
 
 const MenuBarItemLayout = styled.span`
     display: block;
-    color: ${props => props.colorScheme.bcgColor};
+    color: ${props => props.isPressed ? props.colorScheme.menuItemHoverTextColor : props.colorScheme.menuItemTextColor};
     padding: 5px 10px;
     font-style: italic;
-    background-color: ${props => props.isPressed ? props.colorScheme.thirdColor : 'transparent'};
+    background-color: ${props => props.isPressed ? props.colorScheme.menuItemHoverColor : 'transparent'};
     user-select: none;
 `
 
@@ -16,13 +16,13 @@ const SubmenuLayout = styled.span`
     position: absolute;
     top: ${props => props.top}px;
     left: ${props => props.left}px;
-    border: 1px solid ${props => props.colorScheme.primaryColor};
+    border: 1px solid ${props => props.colorScheme.contextBorderColor};
     border-radius: 2px;
-    background-color: ${props => props.colorScheme.thirdColor}80;
+    background-color: ${props => props.colorScheme.contextBcgColor};
     box-shadow: 0 0 10px #00000030;
 `
 
-const MenuBarItem = ({ id, title, submenuItems, colorScheme, isOpenned, menuPosition, openCollback }) => {
+const MenuBarItem = ({ id, title, sections, colorScheme, isOpenned, menuPosition, openCollback }) => {
     const [submenuPosition, setSubmenuPosition] = React.useState(menuPosition)
     const itemRef = React.useRef();
     const submenuRef = React.useRef();
@@ -43,8 +43,21 @@ const MenuBarItem = ({ id, title, submenuItems, colorScheme, isOpenned, menuPosi
         {
             isOpenned && <SubmenuLayout autoFocus ref={submenuRef} top={submenuPosition.top} left={submenuPosition.left} colorScheme={colorScheme}>
                 {
-                    submenuItems.map(item => <MenuSubItem isVisible={isOpenned} key={nanoid()} icon={item.icon} title={item.title} colorScheme={item.colorScheme} onClick={_ => onSubmenuItemClicked(item)} />)
+                    sections[0].map((item, index) => <MenuSubItem isVisible={isOpenned} key={nanoid()} last={false} icon={item.icon} title={item.title} colorScheme={item.colorScheme} onClick={_ => onSubmenuItemClicked(item)} />)
                 }
+                {
+                    sections.length === 2 && (
+                        <>
+                        <hr style={{ margin: 0, padding: 0, border: 'none', borderTop: `1px solid ${colorScheme.menuSectionSeparatorColor}` }}/>
+                        {
+                             sections[1].map(item => <MenuSubItem isVisible={isOpenned} key={nanoid()} last={false} icon={item.icon} title={item.title} colorScheme={item.colorScheme} onClick={_ => onSubmenuItemClicked(item)} />)
+                        }
+                        </>
+                        
+                       
+                    )
+                }
+            
             </SubmenuLayout>
         }
 
