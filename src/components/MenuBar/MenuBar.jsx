@@ -49,6 +49,11 @@ const MenuBar = ({ items, colorScheme }) => {
     const handleSwitchBlindMode = (e) => {
         if (e.shiftKey && e.keyCode === 9) {
             e.preventDefault();
+
+            if (blindMode) {
+                setSelected(-1);
+            }
+
             setBlindMode(!blindMode)
         }
     }
@@ -72,6 +77,7 @@ const MenuBar = ({ items, colorScheme }) => {
     const speak = (text) => {
         synth.cancel();
         let speech = new SpeechSynthesisUtterance();
+        speech.lang = 'en-US';
         speech.text = text;
         synth.speak(speech);
     }

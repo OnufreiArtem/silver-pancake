@@ -3,7 +3,7 @@ export const words = [
     'vacuum',
     'blade',
     'harbor',
-    'cemetery',
+    'police',
     'portrait',
     'turkey',
     'ban',

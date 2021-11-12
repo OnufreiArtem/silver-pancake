@@ -31,7 +31,14 @@ const MenuBarItem = ({ id, title, target, sections, colorScheme, isOpenned, menu
     const submenuRef = React.useRef();
     const [selectedElement, setSelectedElement] = React.useState(-1);
 
-    const maxSelectionIndex = () => sections.reduce((prev, next) => prev.length + next.length)
+    const maxSelectionIndex = () => {
+        if (sections.length === 0) return 0;
+        let count = 0;
+        for (let i = 0; i < sections.length; i++) {
+            count += sections[i].length;
+        }
+        return count;
+    }
 
     const calculateMenuPost = () => ({ top: itemRef.current.offsetTop + itemRef.current.offsetHeight + itemRef.current.offsetHeight * 0.2, left: itemRef.current.offsetLeft + itemRef.current.offsetWidth * 0.4, });
 
@@ -50,6 +57,7 @@ const MenuBarItem = ({ id, title, target, sections, colorScheme, isOpenned, menu
     const speak = (text) => {
         synth.cancel();
         let speech = new SpeechSynthesisUtterance();
+        speech.lang = 'en-US';
         speech.text = text;
         synth.speak(speech);
     }

@@ -11,7 +11,7 @@ export const ContextMenuLayout = styled.span`
 
 export const TextContextMenuItem = styled.span`
     display: block;    
-    color: ${props => props.colorScheme.contextTextColor}
+    color: ${props => props.colorScheme.contextTextColor};
     padding-left: 10px;
 `
 

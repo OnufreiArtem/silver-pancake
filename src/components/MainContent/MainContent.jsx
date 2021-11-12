@@ -115,8 +115,6 @@ const MainContent = ({ onSearchBarChanged, onSearch, searchBarText, colorScheme 
     const [searchResult, setSearchResult] = React.useState([]);
 
     const onSearchEvent = (word) => {
-        // onSearch(searchBarText)
-        //setSearchResult(Array(text.length).fill("Text"))
         const wordRegexp = new RegExp(`^${word}$`)
         setSearchResult(words.filter(it => wordRegexp.test(it)));
     }
@@ -137,11 +135,10 @@ const MainContent = ({ onSearchBarChanged, onSearch, searchBarText, colorScheme 
             </SearchLayout>
             <ResultsContainer colorScheme={colorScheme}>
                 <FiltersContainer>
-                    <Dropdown title="Filter by: " colorScheme={colorScheme} onSelected={(index) => setSelectedFilter(index)} selected={selectedFilter} items={[{ title: "Most Popular", onClick: () => { } }, { title: "Less Popular", onClick: () => { } }]} />
+                    <Dropdown title="Filter by: " colorScheme={colorScheme} onSelected={(index) => setSelectedFilter(index)} selected={selectedFilter} items={[{ title: "Show all", onClick: () => { } }, { title: "Show censured", onClick: () => { } }]} />
                     <Dropdown title="View: "  colorScheme={colorScheme} onSelected={(index) => setSelectedView(index)} selected={selectedView} items={[{ title: "Two columns", onClick: () => setColumnNumber(2) }, { title: "Three columns", onClick: () => setColumnNumber(3) }]} />
                 </FiltersContainer>
                 <TableView colorScheme={colorScheme} columns={columnNumber} maxInColumn={5} data={searchResult} />
-                {/* ['asdfasfsa1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1',] */}
             </ResultsContainer>
         </ContentLayout>
     </MainWrapper>)
