@@ -11,6 +11,7 @@ import {
   TextContextMenuItem
 } from './components/ContextMenu/ContextMenu';
 import { ContextMenu, ContextMenuTrigger, MenuItem } from 'react-contextmenu';
+import { words } from './words';
 
 
 const colorScheme = {
@@ -107,6 +108,7 @@ function App() {
   const [theme, setTheme] = React.useState(colorScheme);
 
   const [searchBarText, setSearchBarText] = React.useState("");
+  const [searchResult, setSearchResult] = React.useState([]);
 
   React.useEffect(() => {
     document.body.style.backgroundColor = theme.bcgColor;
@@ -115,6 +117,11 @@ function App() {
   const handleKeyShortCut = (e) => {
     if (e.ctrlKey && (e.key === 'X' || e.key === 'x')) { alert("Application is off") }
   }
+
+  const onSearchEvent = (word) => {
+    const wordRegexp = new RegExp(`^${word}$`)
+    setSearchResult(words.filter(it => wordRegexp.test(it)));
+}
 
   React.useEffect(() => {
     document.addEventListener('keyup', handleKeyShortCut, false);
@@ -132,10 +139,6 @@ function App() {
   const onHowToUsePressed = () => {
     setShowAbout(false);
     setShowHowToUse(true)
-  }
-
-  const onSearchPressed = (text) => {
-    console.log("Search Triggered: " + text);
   }
 
   return (
@@ -158,7 +161,7 @@ function App() {
                 title: "Clear",
                 colorScheme: theme,
                 last: false,
-                onClick: () => { setSearchBarText("") }
+                onClick: () => { setSearchBarText(""); onSearchEvent("") }
               },
               {
                 icon: "",
@@ -202,7 +205,7 @@ function App() {
         }
       ]} colorScheme={theme} />
       <ContextMenuTrigger id="main-context-trigger">
-        <MainContent onSearchBarChanged={(text) => setSearchBarText(text)} onSearch={(text) => onSearchPressed(text)} searchBarText={searchBarText} colorScheme={theme} />
+        <MainContent onSearchBarChanged={(text) => setSearchBarText(text)} searchResult={searchResult} onSearch={(text) => onSearchEvent(text)} searchBarText={searchBarText} colorScheme={theme} />
       </ContextMenuTrigger>
 
       <ContextMenu id="main-context-trigger" class="context-menu">
@@ -218,7 +221,7 @@ function App() {
             </IconContextMenuItemLayout>
           </MenuItem>
 
-          <MenuItem class="context-menu-item" onClick={e => setSearchBarText("")}>
+          <MenuItem class="context-menu-item" onClick={e => { setSearchBarText(""); onSearchEvent("") } }>
             <IconContextMenuItemLayout colorScheme={theme}>
               <svg style={{ marginRight: '10px' }} width="19" height="12" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3.79778 1.47418L1.32505 5.47418C1.12585 5.79642 1.12585 6.20358 1.32505 6.52582L3.79778 10.5258C3.98 10.8206 4.30184 11 4.64838 11H17C17.5523 11 18 10.5523 18 10V2C18 1.44772 17.5523 1 17 1H4.64838C4.30184 1 3.98 1.17941 3.79778 1.47418Z" stroke={theme.contextTextColor} />
