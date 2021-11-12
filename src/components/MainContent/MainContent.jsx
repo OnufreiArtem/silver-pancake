@@ -137,7 +137,7 @@ const MainContent = ({ onSearchBarChanged, onSearch, searchBarText, colorScheme 
             </SearchLayout>
             <ResultsContainer colorScheme={colorScheme}>
                 <FiltersContainer>
-                    <Dropdown title="Filter by: " colorScheme={colorScheme} onSelected={(index) => setSelectedFilter(index)} selected={selectedFilter} items={[{ title: "lorem1", onClick: () => { } }, { title: "lorem2", onClick: () => { } }]} />
+                    <Dropdown title="Filter by: " colorScheme={colorScheme} onSelected={(index) => setSelectedFilter(index)} selected={selectedFilter} items={[{ title: "Most Popular", onClick: () => { } }, { title: "Less Popular", onClick: () => { } }]} />
                     <Dropdown title="View: "  colorScheme={colorScheme} onSelected={(index) => setSelectedView(index)} selected={selectedView} items={[{ title: "Two columns", onClick: () => setColumnNumber(2) }, { title: "Three columns", onClick: () => setColumnNumber(3) }]} />
                 </FiltersContainer>
                 <TableView colorScheme={colorScheme} columns={columnNumber} maxInColumn={5} data={searchResult} />

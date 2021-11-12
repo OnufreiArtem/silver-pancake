@@ -24,6 +24,7 @@ const SubItemContainer = styled.span`
     background-color: transparent;
     padding: 5px;
     transition: .3s all;
+    ${props => props.isTargeted === true ? "outline: 3px solid black;" : ""}
 
     &:hover {
         background-color: ${props => props.colorScheme.contextElementHoverColor};
@@ -44,7 +45,7 @@ const Text = styled.span`
     user-select: none;
 `
 
-const MenuSubItem = ({ icon, shortCut, title, colorScheme, onClick }) => {
+const MenuSubItem = ({ icon, isTargeted, shortCut, title, colorScheme, onClick }) => {
 
     const iconGenerator = (icon) => {
         if (icon === "export") {
@@ -67,7 +68,20 @@ const MenuSubItem = ({ icon, shortCut, title, colorScheme, onClick }) => {
         }
     }
 
-    return (<SubItemContainer showShortCut={shortCut !== undefined} shortCut={shortCut} colorScheme={colorScheme} onClick={_ => onClick()}>
+    const handleEnter = (e) => {
+        if (isTargeted && e.keyCode === 13) {
+            onClick();
+        }
+    }
+
+    React.useEffect(() => {
+        document.addEventListener("keydown", handleEnter);
+        return () => {
+            document.removeEventListener("keydown", handleEnter);
+        }
+    })
+
+    return (<SubItemContainer isTargeted={isTargeted} showShortCut={shortCut !== undefined} shortCut={shortCut} colorScheme={colorScheme} onClick={_ => onClick()}>
         {
             iconGenerator(icon)
         }

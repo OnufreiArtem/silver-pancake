@@ -109,9 +109,6 @@ function App() {
   const [searchBarText, setSearchBarText] = React.useState("");
 
   React.useEffect(() => {
-    // let speech = new SpeechSynthesisUtterance();
-    // speech.text = "Hello world"
-    // window.speechSynthesis.speak(speech)
     document.body.style.backgroundColor = theme.bcgColor;
   }, [theme])
 
